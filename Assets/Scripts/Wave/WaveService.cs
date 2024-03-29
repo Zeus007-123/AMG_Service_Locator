@@ -25,12 +25,6 @@ namespace ServiceLocator.Wave
 
         private static WaveService instance;
 
-        private void Start()
-        {
-            InitializeBloons();
-            SubscribeToEvents();
-        }
-
         private void Awake()
         {
             if (instance == null)
@@ -42,6 +36,12 @@ namespace ServiceLocator.Wave
                 Destroy(this.gameObject);
                 Debug.LogError("Singleton of WaveService is Trying to create Second Instance");
             }
+        }
+
+        private void Start()
+        {
+            InitializeBloons();
+            SubscribeToEvents();
         }
 
         private void InitializeBloons()

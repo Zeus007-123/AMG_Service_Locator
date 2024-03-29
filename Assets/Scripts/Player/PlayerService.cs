@@ -23,15 +23,9 @@ namespace ServiceLocator.Player
 
         public int Money { get; private set; }
 
-        private void Start()
-        {
-            projectilePool = new ProjectilePool(playerScriptableObject.ProjectilePrefab, playerScriptableObject.ProjectileScriptableObjects);
-            InitializeVariables();
-        }
-
         private void Awake()
         {
-            if (instance == null) 
+            if (instance == null)
             {
                 instance = this;
             }
@@ -40,6 +34,12 @@ namespace ServiceLocator.Player
                 Destroy(this.gameObject);
                 Debug.LogError("Singleton of PlayerService is Trying to create Second Instance");
             }
+        }
+
+        private void Start()
+        {
+            projectilePool = new ProjectilePool(playerScriptableObject.ProjectilePrefab, playerScriptableObject.ProjectileScriptableObjects);
+            InitializeVariables();
         }
 
         private void InitializeVariables()

@@ -13,11 +13,6 @@ namespace ServiceLocator.Sound
 
         private static SoundService instance;
 
-        private void Start()
-        {
-            PlaybackgroundMusic(SoundType.BackgroundMusic, true);
-        }
-
         private void Awake()
         {
             if (instance == null)
@@ -29,6 +24,11 @@ namespace ServiceLocator.Sound
                 Destroy(this.gameObject);
                 Debug.LogError("Singleton of SoundService is Trying to create Second Instance");
             }
+        }
+
+        private void Start()
+        {
+            PlaybackgroundMusic(SoundType.BackgroundMusic, true);
         }
 
         public void PlaySoundEffects(SoundType soundType, bool loopSound = false)

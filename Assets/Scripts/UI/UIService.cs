@@ -42,6 +42,19 @@ namespace ServiceLocator.UI
 
         private static UIService instance;
 
+        private void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(this.gameObject);
+                Debug.LogError("Singleton of UIService is Trying to create Second Instance");
+            }
+        }
+
         private void Start()
         {
             monkeySelectionController = new MonkeySelectionUIController(cellContainer, monkeyCellPrefab, monkeyCellScriptableObjects);
@@ -57,19 +70,6 @@ namespace ServiceLocator.UI
             playAgainButton.onClick.AddListener(OnPlayAgainButtonClicked);
             
             SubscribeToEvents();
-        }
-
-        private void Awake()
-        {
-            if (instance == null )
-            {
-                instance = this;
-            }
-            else
-            {
-                Destroy(this.gameObject);
-                Debug.LogError("Singleton of UIService is Trying to create Second Instance");
-            }
         }
 
         public void SubscribeToEvents() => eventService.OnMapSelected.AddListener(OnMapSelected);
